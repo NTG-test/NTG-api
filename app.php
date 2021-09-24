@@ -6,8 +6,8 @@
             'https://nategh.nategh.net',
             'https://cleveraj.info'
         ),
-        'dbName'      => 'u788281512_cleveraj',
-        'dbUsername'  => 'u788281512_cleveraj',
-        'dpPassword'  => 'p=UgaBci6',
+        'dbName'      => 'u788281512_nategh',
+        'dbUsername'  => 'u788281512_nategh',
+        'dpPassword'  => 'e3$REFY#$REE#$erdeser53',
 		'allowController' => array('help', 'account', 'language', 'quran', 'search')
     );
