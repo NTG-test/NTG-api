@@ -18,9 +18,9 @@
 	if (!isset($_GET['id']))                    $_GET['id'] = NULL;
 
 	//Database
-	$GLOBALS['db'] = mysqli_connect('localhost', 'u788281512_nategh', 'e3$REFY#$REE#$erdeser53')
-	    or exit('ntgMySqldatabaseConnectionError');
-	mysqli_select_db($GLOBALS['db'], 'u788281512_nategh');
+	$GLOBALS['db'] = mysqli_connect('localhost', $GLOBALS['nwaApp']['dbUsername'], $GLOBALS['nwaApp']['dpPassword'])
+	    or exit('nwaMySqldatabaseConnectionError');
+	mysqli_select_db($GLOBALS['db'], $GLOBALS['nwaApp']['dbName']);
 	mysqli_set_charset($GLOBALS['db'],'utf8');
 
 	//Reqest when done
@@ -85,8 +85,7 @@
  	if (!$_SERVER['HTTPS']) done(505,'requiredSecureHttpsProtocol');
 
  	//Reject Other Origins
-	$allowedOrigins = array('', 'https://api.nategh.net', 'https://nategh.nategh.net', 'https://cleveraj.info');
-	if (!in_array($_SERVER['HTTP_ORIGIN'], $allowedOrigins)) done(403,'originNotAllowed');
+    if (!in_array($_SERVER['HTTP_ORIGIN'], $GLOBALS['nwaApp']['allowOrigin'])) done(403,'originNotAllowed');
 
 	//Convert POST data (JSON) to Object
 	$_POST = json_decode(file_get_contents('php://input'), true);
@@ -95,7 +94,6 @@
 	if (is_object($_POST)) foreach($_POST as $key => $value) $_POST[$key] = mysqli_real_escape_string($GLOBALS['db'], $value);
 
     //Authorization export $GLOBALS['ntgUserId'] from token
-	$noTokenAllowedControllers = array('help', 'account', 'language', 'quran', 'search', 'language');
     if ($_SERVER['HTTP_AUTHORIZATION']) {
     	$result = mysqli_query($GLOBALS['db'], "SELECT * FROM ntgToken WHERE token='".hash('sha256',$_SERVER['HTTP_AUTHORIZATION'])."' LIMIT 1");
     	if ($ntgToken = mysqli_fetch_array($result)) {
@@ -107,7 +105,7 @@
         		} else if ($_GET['controller']!='account')	done(404,'tokenUserIdNotFound');
 			} else if ($_GET['controller']!='account')	done(404,'tokenUserIdNotFound2');
     	} else done(401,'tokenInvalid');
-	} else if (!in_array($_GET['controller'], $noTokenAllowedControllers)) done(401,'tokenRequired');
+	} else if (!in_array($_GET['controller'], $GLOBALS['nwaApp']['allowController'])) done(401,'tokenRequired');
 
 	//API List Help, URL: api.com/help
 	if ($_GET['controller']=='help') {
