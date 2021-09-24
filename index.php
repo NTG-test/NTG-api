@@ -1,6 +1,9 @@
 <?php
 	error_reporting(E_ALL);
 
+	//Libraries
+	require 'app.php';
+
 	//Cors
 	header('Access-Control-Allow-Origin: *');
 	header('Access-Control-Allow-Methods: GET, POST, DELETE, OPTIONS');
