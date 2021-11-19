@@ -113,8 +113,7 @@ class nwaApi {
 				'Cleveraj Log '.$statusCode,
 				'Ip: '.$GLOBALS['nwaApi']->ip.'<br>'.
 				'Response: '.json_encode($response, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT).'<br>'.
-				'Token: '.$GLOBALS['nwaApi']->token.'<br>'.
-				'Origin: '.$_SERVER["HTTP_ORIGIN"]
+				'Token: '.$GLOBALS['nwaApi']->token.'<br>'
 				// 'MIME-Version: 1.0\r\nContent-type:text/html;charset=UTF-8\r\nFrom: noreply@cleveraj.com'
 			);
 		}

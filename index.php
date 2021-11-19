@@ -49,8 +49,8 @@ if (!$_SERVER['HTTPS'])
 	$GLOBALS['nwaApi']->done(505, 'requiredSecureHttpsProtocol');
 
 // Reject Other Origins
-if (!in_array($_SERVER['HTTP_ORIGIN'], $GLOBALS['nwaApp']['allowedOrigins']))
-	$GLOBALS['nwaApi']->done(403, 'originNotAllowed');
+// if (!in_array($_SERVER['HTTP_ORIGIN'], $GLOBALS['nwaApp']['allowedOrigins']))
+// 	$GLOBALS['nwaApi']->done(403, 'originNotAllowed');
 
 // Convert POST data (JSON) to Object
 $_POST = json_decode(file_get_contents('php://input'), true);
