@@ -19,5 +19,5 @@
 
 		$GLOBALS['nwaApi']->massage('Test massage from language.');
 		$GLOBALS['nwaApi']->responseData = $response;
-		$GLOBALS['nwaApi']->done(200, 'CMC Data');
+		$GLOBALS['nwaApi']->done(200);
 	}
