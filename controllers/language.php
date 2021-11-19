@@ -10,7 +10,7 @@
 		$i=1;
 		$response = (object) [];
 		while($row = $result->fetch_assoc()) {
-			$response->$i = (object) [
+			$GLOBALS['nwaApi']->responseData->$i = (object) [
 				'selector'=>$row['selector'],
 				'attribute'=>$row['attribute'],
 				'trans'=>$row[$GLOBALS['nwaApi']->id]
@@ -19,6 +19,6 @@
 		}
 
 		$GLOBALS['nwaApi']->massage('Test massage from language.');
-		$GLOBALS['nwaApi']->responseData = $response;
+		// $GLOBALS['nwaApi']->responseData = $response;
 		$GLOBALS['nwaApi']->done(200);
 	}
