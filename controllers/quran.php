@@ -1,5 +1,5 @@
 <?php
 
-    function GET() {
-        $GLOBALS['nwaApi']->done(200, 'بسم الله الرحمن الرحیم');
-    }
+	function GET() {
+		$GLOBALS['nwaApi']->done(200, 'بسم الله الرحمن الرحیم');
+	}
