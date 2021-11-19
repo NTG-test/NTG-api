@@ -2,10 +2,11 @@
 
 	function GET() {
 		if (!$GLOBALS['nwaApi']->id) $GLOBALS['nwaApi']->done(400, 'langCodeIsNotSet');
-		$GLOBALS['nwaApi']->done(200, 'lang');
-
+		
 		$allowedLang = array('enUS', 'ar', 'fa');
-		if (!in_array($_GET['id'], $allowedLang)) done(404, 'langCodeNotFound');
+		if (!in_array($GLOBALS['nwaApi']->id, $allowedLang)) $GLOBALS['nwaApi']->done(404, 'langCodeNotFound');
+		
+		$GLOBALS['nwaApi']->done(200, 'lang');
 
 		$result = mysqli_query($GLOBALS['db'], "SELECT * FROM nwaLanguage");
 		$i=1;
