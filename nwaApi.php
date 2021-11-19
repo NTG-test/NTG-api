@@ -67,7 +67,7 @@ class nwaApi {
 	}
 
 	//Exit request, create response, log in db
-	function done($statusCode, $responseFinalMassage) {
+	function done($statusCode, $responseFinalMassage = null) {
 		if (isset($responseFinalMassage)) {
 			array_push($this -> massage, $responseFinalMassage);
 		}
