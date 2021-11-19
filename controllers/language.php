@@ -8,6 +8,7 @@
 
 		$result = $GLOBALS['db']->query("SELECT * FROM nwaLanguage");
 		$i=1;
+		$response = (object) [];
 		while($row = $result->fetch_assoc()) {
 			$response->$i = (object) [
 				'selector'=>$row['selector'],
