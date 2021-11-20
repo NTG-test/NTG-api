@@ -1,4 +1,4 @@
-# FiCoin-api
+# NTG-api
 
-Vars, Files, Functions: camelCase (No exception)
-Constants: all uppercase
+SQL Table, Vars, Files, Functions: camelCase (No exception)
+Constants: all uppercase (underline between words)

@@ -67,16 +67,18 @@ if (is_object($_POST)) {
 if (file_exists('controllers/'.$GLOBALS['nwaApi']->controller.'.php')) {
 	require 'controllers/'.$GLOBALS['nwaApi']->controller.'.php';
 } else {
-	$GLOBALS['nwaApi']->done(404, 'controllerNotFound', nwaApiHelp());
+	$GLOBALS['nwaApi']->responseData = nwaApiHelp();
+	$GLOBALS['nwaApi']->done(404, 'controllerNotFound');
 }
 //Method function
 if (function_exists($GLOBALS['nwaApi']->method)) {
 	($GLOBALS['nwaApi']->method)();
 } else {
-	$GLOBALS['nwaApi']->done(405, 'methodNotAllowed', nwaApiHelp());
+	$GLOBALS['nwaApi']->responseData = nwaApiHelp();
+	$GLOBALS['nwaApi']->done(405, 'methodNotAllowed');
 }
 
-$GLOBALS['nwaApi']->done(204, 'nothingDone', nwaApiHelp());
+$GLOBALS['nwaApi']->done(204, 'nothingDone');
 
 /*
 $GLOBALS['nwaApp']		Data to handle api permissions
