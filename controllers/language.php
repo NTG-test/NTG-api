@@ -21,3 +21,7 @@ function GET() {
 	// $GLOBALS['nwaApi']->responseData = $response;
 	$GLOBALS['nwaApi']->done(200);
 }
+
+function POST() {
+	
+}

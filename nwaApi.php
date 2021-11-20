@@ -14,7 +14,8 @@ class nwaApi {
 
 	private $massage = array();
 	private static $status = array(
-		661 => 'HTTP/1.1 661 nwaMySqldatabaseConnectionError',
+		// 661 => 'HTTP/1.1 661 nwaMySqldatabaseConnectionError',
+		// 662 => 'HTTP/1.1 661 nwaMySqldatabaseError',
 		100 => 'HTTP/1.1 100 Continue',
 		101 => 'HTTP/1.1 101 Switching Protocols',
 		200 => 'HTTP/1.1 200 OK',
