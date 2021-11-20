@@ -10,7 +10,7 @@ class nwaApi {
 	public $userId;
 	public $businessId;
 
-	public $responseData;
+	public $responseData = array();
 
 	private $massage = array();
 	private static $status = array(
@@ -70,19 +70,19 @@ class nwaApi {
 	//Exit request, create response, log in db
 	function done($statusCode, $responseFinalMassage = null) {
 		if (isset($responseFinalMassage)) {
-			array_push($this -> massage, $responseFinalMassage);
+			array_push($this->massage, $responseFinalMassage);
 		}
 		$this -> checkSqlErrors();
 
 		$response = (object) [];
-		$response -> status = (object) [
+		$response->status = (object) [
 			'statusCode' => $statusCode,
 			'status' => self::$status[$statusCode],
 			'timestamp' => time(),
 			'responseTime' => 0,
-			'massage' => $this -> massage
+			'massage' => $this->massage
 		];
-		$response -> data = $this -> responseData;
+		$response->data = $this->responseData;
 
 		$GLOBALS['db'] -> query(
 			"INSERT INTO nwaRequest (
@@ -107,7 +107,7 @@ class nwaApi {
 				'".$GLOBALS['nwaApi']->token."'
 			)
 		");
-	
+
 		if ($statusCode >= 300) {
 			mail(
 				'nexnema@gmail.com',
