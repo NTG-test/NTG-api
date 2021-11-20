@@ -6,7 +6,7 @@ function GET() {
 	$allowedLang = array('enUS', 'ar', 'fa');
 	if (!in_array($GLOBALS['nwaApi']->id, $allowedLang)) $GLOBALS['nwaApi']->done(404, 'langCodeNotFound');
 
-		$result = $GLOBALS['db']->query("SELECT * FROM nwaLanguage");
+	$result = $GLOBALS['db']->query("SELECT * FROM nwaLanguage");
 	$i=1;
 	while($row = $result->fetch_assoc()) {
 		$GLOBALS['nwaApi']->responseData->$i = (object) [
