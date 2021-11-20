@@ -57,12 +57,12 @@ class nwaApi {
 		505 => 'HTTP/1.1 505 HTTP Version Not Supported'
 	);
 
-	function massage($massage) {
-		array_push($this -> massage, $massage);
+	function massage(string $massage) {
+		array_push($this->massage, $massage);
 	}
 	private function checkSqlErrors() {
-		if ($GLOBALS['db'] -> error) {
-			array_push($this -> massage, 'sqlError: ' . $GLOBALS['db'] -> error);
+		if ($GLOBALS['db']->error) {
+			array_push($this->massage, 'sqlError: '.$GLOBALS['db']->error);
 		}
 	}
 
