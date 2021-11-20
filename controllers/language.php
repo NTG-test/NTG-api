@@ -1,6 +1,6 @@
 <?php
 
-function GET($action, $id) {
+function GET() {
 	if (!$GLOBALS['nwaApi']->id) $GLOBALS['nwaApi']->done(400, 'langCodeIsNotSet');
 		
 	$allowedLang = array('enUS', 'ar', 'fa');
