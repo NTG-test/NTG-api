@@ -10,6 +10,7 @@ class nwaApi {
 	public $userId;
 	public $businessId;
 
+	public $statusCode;
 	public $responseData = array();
 
 	private $massage = array();
@@ -69,6 +70,7 @@ class nwaApi {
 
 	//Exit request, create response, log in db
 	function done($statusCode, $responseFinalMassage = null) {
+		$this->statusCode = $statusCode;
 		if (isset($responseFinalMassage)) {
 			array_push($this->massage, $responseFinalMassage);
 		}
@@ -76,8 +78,8 @@ class nwaApi {
 
 		$response = array(
 			'status' => array(
-				'statusCode' => $statusCode,
-				'status' => self::$status[$statusCode],
+				'statusCode' => $this->statusCode,
+				'status' => self::$status[$this->statusCode],
 				'timestamp' => time(),
 				'responseTime' => 0,
 				'massage' => $this->massage
@@ -96,25 +98,25 @@ class nwaApi {
 				remoteAddr,
 				token
 			) VALUES (
-				'".$statusCode."',
+				'".$this->statusCode."',
 				'".json_encode($response, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT)."',
 				'".time()."',
-				'".$GLOBALS['nwaApi']->controller."',
-				'".$GLOBALS['nwaApi']->method."',
-				'".$GLOBALS['nwaApi']->action."',
-				'".$GLOBALS['nwaApi']->id."',
-				'".$GLOBALS['nwaApi']->ip."',
-				'".$GLOBALS['nwaApi']->token."'
+				'".$this->controller."',
+				'".$this->method."',
+				'".$this->action."',
+				'".$this->id."',
+				'".$this->ip."',
+				'".$this->token."'
 			)
 		");
 
-		if ($statusCode >= 300) {
+		if ($this->statusCode >= 300) {
 			mail(
 				'nexnema@gmail.com',
-				'Cleveraj Log '.$statusCode,
-				'Ip: '.$GLOBALS['nwaApi']->ip.'<br>'.
+				'Cleveraj Log '.$this->statusCode,
+				'Ip: '.$this->ip.'<br>'.
 				'Response: '.json_encode($response, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT).'<br>'.
-				'Token: '.$GLOBALS['nwaApi']->token.'<br>'
+				'Token: '.$this->token.'<br>'
 				// 'MIME-Version: 1.0\r\nContent-type:text/html;charset=UTF-8\r\nFrom: noreply@cleveraj.com'
 			);
 		}
