@@ -74,16 +74,16 @@ class nwaApi {
 		}
 		$this -> checkSqlErrors();
 
-		$response = (object) [];
-		$response->status = array(
-			'statusCode' => $statusCode,
-			'status' => self::$status[$statusCode],
-			'timestamp' => time(),
-			'responseTime' => 0,
-			'massage' => $this->massage
+		$response = array(
+			'status' => array(
+				'statusCode' => $statusCode,
+				'status' => self::$status[$statusCode],
+				'timestamp' => time(),
+				'responseTime' => 0,
+				'massage' => $this->massage
+			);
+			'data' => $this->responseData;
 		);
-		$response->data = $this->responseData;
-
 		$GLOBALS['db'] -> query(
 			"INSERT INTO nwaRequest (
 				statusCode,
