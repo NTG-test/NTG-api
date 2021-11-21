@@ -24,7 +24,6 @@ require 'nwaApi.php';
 
 // NULL Not set variables
 $GLOBALS['nwaApi'] = new nwaApi();
-$GLOBALS['nwaApi']->responseData = (object) [];
 if (isset($_SERVER['REMOTE_ADDR']))			$GLOBALS['nwaApi']->ip = $_SERVER['REMOTE_ADDR'];
 if (isset($_SERVER['HTTP_AUTHORIZATION']))	$GLOBALS['nwaApi']->token = $_SERVER['HTTP_AUTHORIZATION'];
 if (isset($_GET['controller']))				$GLOBALS['nwaApi']->controller = $_GET['controller'];

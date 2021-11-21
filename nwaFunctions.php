@@ -18,14 +18,15 @@ function nwaCurl($url, $parameters, $headers) {
 
 //API supported controllers & methods Help List
 function nwaApiHelp() {
-	$response = (object) [];
+	$response = array();
 	foreach(glob('controllers/*.php') as $file) {
 		preg_match_all('/function (\w+)/', file_get_contents($file), $functionList);
 		$fileName = pathinfo($file)['filename'];
-		$response -> $fileName = array();
+		array_push($response, $fileName);
+		$response[$fileName] = array();
 		foreach ($functionList[1] as $functionName)
 		if (in_array($functionName, array('GET', 'PUT', 'POST', 'DELETE', 'OPTIONS')))
-			array_push($response -> $fileName, $functionName);
+			array_push($response[$fileName], $functionName);
 	}
 	return $response;
 }
