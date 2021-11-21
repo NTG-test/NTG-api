@@ -81,8 +81,8 @@ class nwaApi {
 				'timestamp' => time(),
 				'responseTime' => 0,
 				'massage' => $this->massage
-			);
-			'data' => $this->responseData;
+			),
+			'data' => $this->responseData
 		);
 		$GLOBALS['db'] -> query(
 			"INSERT INTO nwaRequest (
