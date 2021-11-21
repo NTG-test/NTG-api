@@ -3,7 +3,7 @@
 function appCreateNwaDatabaseTables() {
 	// if (!$GLOBALS['db'] -> query('DESCRIBE appCoins')) {
 	// 	$GLOBALS['db'] -> query(
-	// 		"CREATE TABLE appCoins (
+	// 		"CREATE TABLE IF NOT EXISTS appCoins (
 	// 		id INT(16) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
 	// 		cmcId INT(16),
 	// 		symbol VARCHAR(256),
