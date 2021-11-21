@@ -75,13 +75,13 @@ class nwaApi {
 		$this -> checkSqlErrors();
 
 		$response = (object) [];
-		$response->status = (object) [
-			'statusCode' => $statusCode,
-			'status' => self::$status[$statusCode],
-			'timestamp' => time(),
-			'responseTime' => 0,
-			'massage' => $this->massage
-		];
+		$response->status = array (
+			'statusCode' = $statusCode,
+			'status' = self::$status[$statusCode],
+			'timestamp' = time(),
+			'responseTime' = 0,
+			'massage' = $this->massage
+		);
 		$response->data = $this->responseData;
 
 		$GLOBALS['db'] -> query(
