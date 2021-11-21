@@ -75,7 +75,7 @@ class nwaApi {
 		$this -> checkSqlErrors();
 
 		$response = (object) [];
-		$response->status = array (
+		$response->status = array(
 			'statusCode' => $statusCode,
 			'status' => self::$status[$statusCode],
 			'timestamp' => time(),
