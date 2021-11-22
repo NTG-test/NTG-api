@@ -16,6 +16,7 @@ function GET() {
 		array_push(
 			$GLOBALS['nwaApi']->data,
 			$nwaPhrase = new surah(
+				$row['id'],
 				$row['name'],
 				$row['period']
 			)
