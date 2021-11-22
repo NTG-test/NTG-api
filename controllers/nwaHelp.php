@@ -1,6 +1,8 @@
 <?php
 
-class nwaAcceptedRequestHelp {
+namespace nwa;
+
+class acceptedRequestHelp {
 	private $file;
 	public $controller;
 	public $methods = array();
@@ -26,7 +28,7 @@ function GET() {
 	foreach(glob('controllers/*.php') as $file) {
 		array_push(
 			$GLOBALS['nwaApi']->data,
-			$nwaAcceptedRequestHelp = new nwaAcceptedRequestHelp($file)
+			$nwaAcceptedRequestHelp = new nwa\acceptedRequestHelp($file)
 		);
 	}
 	$GLOBALS['nwaApi']->done(200);
