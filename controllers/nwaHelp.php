@@ -17,11 +17,11 @@ class nwaAcceptedRequestHelp() {
 
 //API supported controllers & methods Help List
 function GET() {
-	foreach(glob('controllers/*.php') as $file) {
-		$nwaAcceptedRequestHelp = new nwaAcceptedRequestHelp();
-		$nwaAcceptedRequestHelp->getHelpDataForController($file);
-		array_push($GLOBALS['nwaApi']->responseData, $responseData);
-	}
+	// foreach(glob('controllers/*.php') as $file) {
+	// 	$nwaAcceptedRequestHelp = new nwaAcceptedRequestHelp();
+	// 	$nwaAcceptedRequestHelp->getHelpDataForController($file);
+	// 	array_push($GLOBALS['nwaApi']->responseData, $responseData);
+	// }
 	$GLOBALS['nwaApi']->done(200, 'ZZZZZ');
 }
 
