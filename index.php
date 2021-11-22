@@ -37,7 +37,7 @@ nwaCreateNwaDatabaseTables();
 appCreateNwaDatabaseTables();
 
 (new nwaEnv('.env'))->load();
-exit(getenv('DATABASE_HOST'));
+exit($_ENV['DATABASE_HOST']);
 
 // NULL Not set variables
 $GLOBALS['nwaApi'] = new nwaApi();
