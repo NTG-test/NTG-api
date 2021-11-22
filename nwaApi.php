@@ -1,6 +1,8 @@
 <?php
 
-class nwaApi {
+namespace nwa;
+
+class api {
 	public $adminMailAddress;
 	public $ip;
 	public $token;
