@@ -2,15 +2,14 @@
 	//Create a New token
 	function createToken() {
 		do {
-			$token = hash('sha512', random_bytes(mt_rand(128,256)));
+			$token = hash('sha256', random_bytes(mt_rand(128,256)));
 			$result = $GLOBALS['db']->query(
-				"SELECT * FROM ntgToken WHERE token='".hash('sha256',$token)."'"
+				"SELECT * FROM nwaToken WHERE token='".hash('sha256',$token)."'"
 			);
 
 		} while ($result->fetch_assoc());
 		return $token;
 	}
-$GLOBALS['nwaApi']->done(200, createToken());
 
 	if ($GLOBALS['nwaApi']->token) $GLOBALS['nwaApi']->done(403, 'userAlreadyHaveToken');
 
@@ -34,13 +33,17 @@ $GLOBALS['nwaApi']->done(200, createToken());
 	}
 
 	function POST() {
-		// if ($_POST['email'] == null) done(400, 'emailNotSet');
-		// if (!filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) done(406, 'InvalidEmailFormat');
+		if ($_POST['email'] == null) {
+			$GLOBALS['nwaApi']->done(400, 'emailNotSet');
+		}
+		if (!filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
+			$GLOBALS['nwaApi']->done(406, 'InvalidEmailFormat');
+		}
 
-		// //send verify code to email
-		// if ($_POST['code'] == null && $_POST['username'] == null && $_POST['name'] == null) {
+		//send verify code to email
+		if ($_POST['code'] == null && $_POST['username'] == null && $_POST['name'] == null) {
 
-		// 	$code = mt_rand(100000, 999999);
+			$code = mt_rand(100000, 999999);
 
 		// 	mysqli_query($GLOBALS['db'], "INSERT INTO ntgVerification (email, time, code) VALUES ('".$_POST['email']."', '".time()."', '".$code."')");
 		// 	$result = mysqli_query($GLOBALS['db'], "SELECT * FROM ntgVerification WHERE id=LAST_INSERT_ID() LIMIT 1");
@@ -48,7 +51,7 @@ $GLOBALS['nwaApi']->done(200, createToken());
 
 		// 	mail($ntgVerification['email'], 'Nategh Authorisation','Your security verification code is: '.$ntgVerification['code'], 'From: noreply@nategh.net');
 		// 	done(200, $ntgVerification['id']);
-		// }
+		}
 
 		// //Verify Email and code: SignIn or SignUp
 		// if ($_POST['code'] != null && $_POST['username'] == null && $_POST['name'] == null) {

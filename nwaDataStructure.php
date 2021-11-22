@@ -4,6 +4,24 @@ namespace nwa;
 
 function createDatabaseTables() {
 	$GLOBALS['db']->query(
+		"CREATE TABLE IF NOT EXISTS nwaToken (
+		id INT(16) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+		userId INT(16),
+		email VARCHAR(128),
+		creationTime INT(16),
+		token VARCHAR(256)
+		) CHARSET=utf8 COLLATE utf8_unicode_ci"
+	);
+	$GLOBALS['db']->query(
+		"CREATE TABLE IF NOT EXISTS nwaLanguage (
+		id INT(16) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+		selector VARCHAR(256),
+		attribute VARCHAR(32),
+		enUS VARCHAR(256),
+		fa VARCHAR(256)
+		) CHARSET=utf8 COLLATE utf8_unicode_ci"
+	);
+	$GLOBALS['db']->query(
 		"CREATE TABLE IF NOT EXISTS nwaRequest (
 		id INT(16) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
 		time INT(4),
@@ -18,16 +36,6 @@ function createDatabaseTables() {
 		token VARCHAR(512),
 		tokenId INT(16),
 		response LONGTEXT
-		) CHARSET=utf8 COLLATE utf8_unicode_ci"
-	);
-
-	$GLOBALS['db']->query(
-		"CREATE TABLE IF NOT EXISTS nwaLanguage (
-		id INT(16) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-		selector VARCHAR(256),
-		attribute VARCHAR(32),
-		enUS VARCHAR(256),
-		fa VARCHAR(256)
 		) CHARSET=utf8 COLLATE utf8_unicode_ci"
 	);
 }
