@@ -1,13 +1,26 @@
 <?php
-    function GET() {
-        if (0) {
-        } else {
-            $result = mysqli_query($GLOBALS['db'], "SELECT * FROM quranSurah ");
-            $i=1;
-            while ($quranSurah = mysqli_fetch_array($result)) {
-                $response -> $i = (object) ['name'=>$quranSurah['name'], 'period'=>$quranSurah['period']];
-                $i++;
-            }
-        }
-        done(200, json_encode($response, JSON_UNESCAPED_UNICODE));
-    }
+
+class surah {
+	public $name;
+	public $period;
+
+	function __construct($name, $period) {
+		$this->name = $name;
+		$this->period = $period;
+	}
+}
+
+function GET() {
+	$result = $GLOBALS['db']->query("SELECT * FROM quranSurah");
+	while($row = $result->fetch_assoc()) {
+		array_push(
+			$GLOBALS['nwaApi']->data,
+			$nwaPhrase = new surah(
+				$row['name'],
+				$row['period']
+			)
+		);
+	}
+
+	$GLOBALS['nwaApi']->done(200);
+}
