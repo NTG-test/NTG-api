@@ -66,7 +66,7 @@ class nwaApi {
 			$this->response = $responseFinalMassage;
 		}
 		if ($GLOBALS['db']->error) {
-			$this->response = 'sqlError: '.$GLOBALS['db']->error);
+			$this->response = 'sqlError: '.$GLOBALS['db']->error;
 		}
 
 		$GLOBALS['db'] -> query(
