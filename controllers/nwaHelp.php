@@ -1,12 +1,17 @@
 <?php
 
 class nwaAcceptedRequestHelp {
+	private $file;
 	public $controller;
 	public $methods = array();
 
-	public function getHelpDataForController($file) {
-		$fileName = pathinfo($file)['filename'];
-		preg_match_all('/function (\w+)/', file_get_contents($file), $functionList);
+	public function __construct($file) {
+		$this->file = $file;
+	}
+
+	public function getHelpDataForController() {
+		$fileName = pathinfo($this->file)['filename'];
+		preg_match_all('/function (\w+)/', file_get_contents($this->file), $functionList);
 		$this->controller = $fileName;
 		foreach ($functionList[1] as $functionName)
 		if (in_array($functionName, array('GET', 'PUT', 'POST', 'DELETE', 'OPTIONS')))
@@ -18,8 +23,8 @@ class nwaAcceptedRequestHelp {
 // API supported controllers & methods Help List
 function GET() {
 	foreach(glob('controllers/*.php') as $file) {
-		$nwaAcceptedRequestHelp = new nwaAcceptedRequestHelp();
-		$nwaAcceptedRequestHelp->getHelpDataForController($file);
+		$nwaAcceptedRequestHelp = new nwaAcceptedRequestHelp($file);
+		$nwaAcceptedRequestHelp->getHelpDataForController();
 		array_push($GLOBALS['nwaApi']->data, $nwaAcceptedRequestHelp);
 	}
 	$GLOBALS['nwaApi']->done(200);
