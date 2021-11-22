@@ -20,7 +20,7 @@ function GET() {
 	foreach(glob('controllers/*.php') as $file) {
 		$nwaAcceptedRequestHelp = new nwaAcceptedRequestHelp();
 		$nwaAcceptedRequestHelp->getHelpDataForController($file);
-		array_push($GLOBALS['nwaApi']->response, $nwaAcceptedRequestHelp);
+		array_push($GLOBALS['nwaApi']->data, $nwaAcceptedRequestHelp);
 	}
 	$GLOBALS['nwaApi']->done(200);
 }

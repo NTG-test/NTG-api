@@ -11,7 +11,7 @@ class nwaApi {
 	public $businessId;
 
 	private $httpResponseCode;
-	public $responseData = array();
+	public $data = array();
 	private $response;
 
 	//Exit request, create response, log in db
@@ -26,7 +26,7 @@ class nwaApi {
 		}
 
 		if (is_null($this->response)) {
-			$this->response = json_encode($this->responseData, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);
+			$this->response = json_encode($this->data, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);
 		}
 
 		$GLOBALS['db'] -> query(
