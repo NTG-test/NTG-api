@@ -15,10 +15,10 @@ class nwaApi {
 	public $data = array();
 	private $response;
 
-	// function __destruct() {
-	// 	$this->logRequestAndResponseToDb();
-	// 	$this->emailErrorToAdmin();
-	// }
+	function __destruct() {
+		$this->logRequestAndResponseToDb();
+		$this->emailErrorToAdmin();
+	}
 
 	// Create response, Exit request
 	public function done($httpResponseCode, $responseFinalMassage = null) {
