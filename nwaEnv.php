@@ -1,6 +1,8 @@
 <?php
 
-class nwaEnv
+namespace nwa;
+
+class env
 {
     /**
      * The directory where the .env file can be located.
@@ -13,11 +15,12 @@ class nwaEnv
     public function __construct(string $path)
     {
         if(!file_exists($path)) {
-            throw new \InvalidArgumentException(sprintf('%s does not exist', $path));
+            exit($path.' does not exist');
         }
         $this->path = $path;
 
         if (!is_readable($this->path)) {
+            exit($this->path.' file is not readable');
             throw new \RuntimeException(sprintf('%s file is not readable', $this->path));
         }
 

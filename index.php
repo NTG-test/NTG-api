@@ -17,7 +17,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') exit();
 require '../nwaDb.php'; //must be ENV file
 // nwaDb.php example: const DB=array('username'=>'***','password'=>'***','name'=>'***');
 require 'nwaEnv.php';
-new nwaEnv('.env');
+new nwa\env('.env');
 require 'app/app.php';
 require 'nwaFunctions.php';
 require 'nwaDataStructure.php';
