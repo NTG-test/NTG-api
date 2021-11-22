@@ -4,6 +4,14 @@ namespace nwa;
 
 function createDatabaseTables() {
 	$GLOBALS['db']->query(
+		"CREATE TABLE IF NOT EXISTS nwaVerification (
+		id INT(16) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+		email VARCHAR(128),
+		creationTime INT(16),
+		code INT(8)
+		) CHARSET=utf8 COLLATE utf8_unicode_ci"
+	);
+	$GLOBALS['db']->query(
 		"CREATE TABLE IF NOT EXISTS nwaToken (
 		id INT(16) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
 		userId INT(16),
