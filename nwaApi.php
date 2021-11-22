@@ -11,7 +11,8 @@ class nwaApi {
 	public $businessId;
 
 	private $httpResponseCode;
-	public $response = array();
+	public $responseData = array();
+	private $response;
 
 	//Exit request, create response, log in db
 	function done($httpResponseCode, $responseFinalMassage = null) {
@@ -23,7 +24,11 @@ class nwaApi {
 		if ($GLOBALS['db']->error) {
 			$this->response = 'sqlError: '.$GLOBALS['db']->error;
 		}
-		
+
+		if (is_null($this->response)) {
+			$this->response = json_encode($this->responseData, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);
+		}
+
 		$GLOBALS['db'] -> query(
 			"INSERT INTO nwaRequest (
 				httpResponseCode,
@@ -37,7 +42,7 @@ class nwaApi {
 				token
 			) VALUES (
 				'".$this->httpResponseCode."',
-				'".json_encode($this->response, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT)."',
+				'".$this->response."',
 				'".time()."',
 				'".$this->controller."',
 				'".$this->method."',
@@ -60,10 +65,6 @@ class nwaApi {
 		}
 
 		http_response_code($this->httpResponseCode);
-		if (is_array($this->response)) {
-			exit(json_encode($this->response, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT));
-		} else {
-			exit($this->response);
-		}
+		exit($this->response);
 	}
 }
