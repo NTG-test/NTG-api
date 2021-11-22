@@ -2,7 +2,7 @@
 
 class nwaAcceptedRequestHelp {
 	public $controller;
-	private $methods = array();
+	public $methods = array();
 
 	public function getHelpDataForController($file) {
 		$fileName = pathinfo($file)['filename'];
