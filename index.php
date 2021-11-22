@@ -39,7 +39,7 @@ appCreateNwaDatabaseTables();
 // NULL Not set variables
 $GLOBALS['nwaApi'] = new nwaApi();
 
-$GLOBALS['nwaApi']->done(200, $_ENV['DATABASE_HOST']);
+$GLOBALS['nwaApi']->done(200, 'ZZZZ');
 
 // Only Accept over HTTPS
 if (!$_SERVER['HTTPS'])
