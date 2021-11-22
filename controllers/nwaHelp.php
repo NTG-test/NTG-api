@@ -5,8 +5,11 @@ class nwaAcceptedRequestHelp {
 	public $controller;
 	public $methods = array();
 
-	public function __construct($file) {
+	function __construct($file) {
 		$this->file = $file;
+	}
+	function __destruct() {
+		$this->getHelpDataForController();
 	}
 
 	public function getHelpDataForController() {
@@ -24,7 +27,7 @@ class nwaAcceptedRequestHelp {
 function GET() {
 	foreach(glob('controllers/*.php') as $file) {
 		$nwaAcceptedRequestHelp = new nwaAcceptedRequestHelp($file);
-		$nwaAcceptedRequestHelp->getHelpDataForController();
+		// $nwaAcceptedRequestHelp->getHelpDataForController();
 		array_push($GLOBALS['nwaApi']->data, $nwaAcceptedRequestHelp);
 	}
 	$GLOBALS['nwaApi']->done(200);
