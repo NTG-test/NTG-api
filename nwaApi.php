@@ -1,6 +1,7 @@
 <?php
 
 class nwaApi {
+	public $adminMailAddress;
 	public $ip;
 	public $token;
 	public $controller;
@@ -68,7 +69,7 @@ class nwaApi {
 				'nexnema@gmail.com',
 				'NWA API Log '.$this->httpResponseCode,
 				'Ip: '.$this->ip.'<br>'.
-				'Response: '.json_encode($this->response, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT).'<br>'.
+				'Response: '.$this->response.'<br>'.
 				'Token: '.$this->token.'<br>'
 				// 'MIME-Version: 1.0\r\nContent-type:text/html;charset=UTF-8\r\nFrom: noreply@cleveraj.com'
 			);
