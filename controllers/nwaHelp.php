@@ -7,6 +7,7 @@ class nwaAcceptedRequestHelp {
 
 	function __construct($file) {
 		$this->file = $file;
+		$this->getHelpDataForController();
 	}
 
 	public function getHelpDataForController() {
@@ -19,7 +20,6 @@ class nwaAcceptedRequestHelp {
 	}
 
 	function __destruct() {
-		$this->getHelpDataForController();
 	}
 }
 
