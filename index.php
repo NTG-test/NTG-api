@@ -17,6 +17,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') exit();
 require '../nwaDb.php'; //must be ENV file
 // nwaDb.php example: const DB=array('username'=>'***','password'=>'***','name'=>'***');
 require 'nwaEnv.php';
+(new nwaEnv('.env'))->load();
 require 'app/app.php';
 require 'nwaFunctions.php';
 require 'nwaDataStructure.php';
@@ -25,10 +26,10 @@ require 'nwaApi.php';
 
 // Connect database
 $GLOBALS['db'] = new mysqli(
-	'localhost',
-	DB['username'],
-	DB['password'],
-	DB['name']
+	$_ENV['DATABASE_HOST'],
+	$_ENV['DATABASE_USER'],
+	$_ENV['DATABASE_PASSWORD'],
+	$_ENV['DATABASE_NAME']
 );
 if ($GLOBALS['db']->connect_error)
 	exit($GLOBALS['db']->connect_error);
@@ -36,12 +37,8 @@ $GLOBALS['db']->set_charset("utf8");
 nwaCreateNwaDatabaseTables();
 appCreateNwaDatabaseTables();
 
-(new nwaEnv('.env'))->load();
-exit($_ENV['DATABASE_HOST']);
-
 // NULL Not set variables
 $GLOBALS['nwaApi'] = new nwaApi();
-
 
 // Only Accept over HTTPS
 if (!$_SERVER['HTTPS'])
