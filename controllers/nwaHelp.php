@@ -24,7 +24,6 @@ class nwaAcceptedRequestHelp {
 // API supported controllers & methods Help List
 function GET() {
 	foreach(glob('controllers/*.php') as $file) {
-		// $nwaAcceptedRequestHelp = new nwaAcceptedRequestHelp($file);
 		array_push(
 			$GLOBALS['nwaApi']->data,
 			$nwaAcceptedRequestHelp = new nwaAcceptedRequestHelp($file)
