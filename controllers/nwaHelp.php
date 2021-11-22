@@ -12,7 +12,7 @@ class nwaAcceptedRequestHelp {
 		$this->getHelpDataForController();
 	}
 
-	public function getHelpDataForController() {
+	private function getHelpDataForController() {
 		$fileName = pathinfo($this->file)['filename'];
 		preg_match_all('/function (\w+)/', file_get_contents($this->file), $functionList);
 		$this->controller = $fileName;
