@@ -15,15 +15,10 @@ class nwaApi {
 	public $data = array();
 	private $response;
 
-	function __destruct() {
-		$this->logRequestAndResponseToDb();
-		$this->emailErrorToAdmin();
-	}
-
 	// Create response, Exit request
 	public function done($httpResponseCode, $responseFinalMassage = null) {
 		$this->httpResponseCode = $httpResponseCode;
-
+		
 		if (isset($responseFinalMassage)) {
 			$this->response = $responseFinalMassage;
 		}
@@ -33,6 +28,9 @@ class nwaApi {
 		if (is_null($this->response)) {
 			$this->response = json_encode($this->data, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);
 		}
+		
+		$this->logRequestAndResponseToDb();
+		$this->emailErrorToAdmin();
 
 		http_response_code($this->httpResponseCode);
 		exit($this->response);
@@ -66,7 +64,7 @@ class nwaApi {
 	private function emailErrorToAdmin() {
 		if ($this->httpResponseCode >= 300) {
 			mail(
-				'nexnema@gmail.com',
+				$this->adminMailAddress,
 				'NWA API Log '.$this->httpResponseCode,
 				'Ip: '.$this->ip.'<br>'.
 				'Response: '.$this->response.'<br>'.
