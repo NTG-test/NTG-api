@@ -14,21 +14,7 @@ class nwaApi {
 	public $data = array();
 	private $response;
 
-	//Exit request, create response, log in db
-	function done($httpResponseCode, $responseFinalMassage = null) {
-		$this->httpResponseCode = $httpResponseCode;
-
-		if (isset($responseFinalMassage)) {
-			$this->response = $responseFinalMassage;
-		}
-		if ($GLOBALS['db']->error) {
-			$this->response = 'sqlError: '.$GLOBALS['db']->error;
-		}
-
-		if (is_null($this->response)) {
-			$this->response = json_encode($this->data, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);
-		}
-
+	private function logRequestAndResponseToDb() {
 		$GLOBALS['db'] -> query(
 			"INSERT INTO nwaRequest (
 				httpResponseCode,
@@ -52,7 +38,8 @@ class nwaApi {
 				'".$this->token."'
 			)
 		");
-		
+	}
+	private function emailErrorToAdmin() {
 		if ($this->httpResponseCode >= 300) {
 			mail(
 				'nexnema@gmail.com',
@@ -63,6 +50,24 @@ class nwaApi {
 				// 'MIME-Version: 1.0\r\nContent-type:text/html;charset=UTF-8\r\nFrom: noreply@cleveraj.com'
 			);
 		}
+	}
+
+	// Create response, Exit request
+	public function done($httpResponseCode, $responseFinalMassage = null) {
+		$this->httpResponseCode = $httpResponseCode;
+
+		if (isset($responseFinalMassage)) {
+			$this->response = $responseFinalMassage;
+		}
+		if ($GLOBALS['db']->error) {
+			$this->response = 'sqlError: '.$GLOBALS['db']->error;
+		}
+		if (is_null($this->response)) {
+			$this->response = json_encode($this->data, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);
+		}
+
+		logRequestAndResponseToDb();
+		emailErrorToAdmin();
 
 		http_response_code($this->httpResponseCode);
 		exit($this->response);
