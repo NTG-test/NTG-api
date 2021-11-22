@@ -1,6 +1,8 @@
 <?php
 
-function nwaCreateNwaDatabaseTables() {
+namespace nwa;
+
+function createDatabaseTables() {
 	$GLOBALS['db']->query(
 		"CREATE TABLE IF NOT EXISTS nwaRequest (
 		id INT(16) UNSIGNED AUTO_INCREMENT PRIMARY KEY,

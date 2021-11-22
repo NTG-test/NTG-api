@@ -31,7 +31,7 @@ $GLOBALS['db'] = new mysqli(
 if ($GLOBALS['db']->connect_error)
 	exit($GLOBALS['db']->connect_error);
 $GLOBALS['db']->set_charset("utf8");
-nwaCreateNwaDatabaseTables();
+nwa\createDatabaseTables();
 appCreateNwaDatabaseTables();
 
 // NULL Not set variables
