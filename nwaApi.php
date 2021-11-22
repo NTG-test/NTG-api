@@ -60,6 +60,10 @@ class nwaApi {
 				}
 				
 				http_response_code($this->httpResponseCode);
-				exit(json_encode($this->response, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT));
+				if (is_array($this->response)) {
+					exit(json_encode($this->response, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT));
+				} else {
+					exit($this->response);
+				}
 			}
 		}
