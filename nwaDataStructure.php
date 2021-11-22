@@ -4,19 +4,28 @@ namespace nwa;
 
 function createDatabaseTables() {
 	$GLOBALS['db']->query(
+		"CREATE TABLE IF NOT EXISTS nwaUser (
+		id INT(16) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+		time INT(16)
+		username VARCHAR(64),
+		email VARCHAR(128),
+		name VARCHAR(64),
+		) CHARSET=utf8 COLLATE utf8_unicode_ci"
+	);
+	$GLOBALS['db']->query(
 		"CREATE TABLE IF NOT EXISTS nwaVerification (
 		id INT(16) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+		time INT(16),
 		email VARCHAR(128),
-		creationTime INT(16),
 		code INT(8)
 		) CHARSET=utf8 COLLATE utf8_unicode_ci"
 	);
 	$GLOBALS['db']->query(
 		"CREATE TABLE IF NOT EXISTS nwaToken (
 		id INT(16) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+		time INT(16),
 		userId INT(16),
 		email VARCHAR(128),
-		creationTime INT(16),
 		token VARCHAR(256)
 		) CHARSET=utf8 COLLATE utf8_unicode_ci"
 	);
