@@ -66,14 +66,12 @@ if (is_object($_POST)) {
 if (file_exists('controllers/'.$GLOBALS['nwaApi']->controller.'.php')) {
 	require 'controllers/'.$GLOBALS['nwaApi']->controller.'.php';
 } else {
-	$GLOBALS['nwaApi']->responseData = nwaApiHelp();
 	$GLOBALS['nwaApi']->done(404, 'controllerNotFound');
 }
 //Method function
 if (function_exists($GLOBALS['nwaApi']->method)) {
 	($GLOBALS['nwaApi']->method)();
 } else {
-	$GLOBALS['nwaApi']->responseData = nwaApiHelp();
 	$GLOBALS['nwaApi']->done(405, 'methodNotAllowed');
 }
 
