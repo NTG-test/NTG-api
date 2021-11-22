@@ -7,10 +7,10 @@ class nwaEnv
      *
      * @var string
      */
-    protected $path;
+    private $path;
 
 
-    public function __construct(string $path)
+    private function __construct(string $path)
     {
         if(!file_exists($path)) {
             throw new \InvalidArgumentException(sprintf('%s does not exist', $path));
