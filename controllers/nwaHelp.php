@@ -4,7 +4,7 @@ class nwaAcceptedRequestHelp {
 	public $controller;
 	public $methods = array();
 
-	public getHelpDataForController($file) {
+	public function getHelpDataForController($file) {
 		$fileName = pathinfo($file)['filename'];
 		preg_match_all('/function (\w+)/', file_get_contents($file), $functionList);
 		$this->controller = $fileName;
