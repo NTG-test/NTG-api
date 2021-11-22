@@ -13,7 +13,6 @@ class nwaApi {
 	public $statusCode;
 	public $responseData = array();
 
-	private $massage = array();
 	private static $status = array(
 		// 661 => 'HTTP/1.1 661 nwaMySqldatabaseConnectionError',
 		// 662 => 'HTTP/1.1 661 nwaMySqldatabaseError',
@@ -59,33 +58,22 @@ class nwaApi {
 		505 => 'HTTP/1.1 505 HTTP Version Not Supported'
 	);
 
-	function massage(string $massage) {
-		array_push($this->massage, $massage);
-	}
-	private function checkSqlErrors() {
-		if ($GLOBALS['db']->error) {
-			array_push($this->massage, 'sqlError: '.$GLOBALS['db']->error);
-		}
-	}
+	// private function checkSqlErrors() {
+	// 	if ($GLOBALS['db']->error) {
+	// 		array_push($this->massage, 'sqlError: '.$GLOBALS['db']->error);
+	// 	}
+	// }
 
 	//Exit request, create response, log in db
 	function done($statusCode, $responseFinalMassage = null) {
 		$this->statusCode = $statusCode;
-		if (isset($responseFinalMassage)) {
-			array_push($this->massage, $responseFinalMassage);
-		}
-		$this -> checkSqlErrors();
+		// if (isset($responseFinalMassage)) {
+		// 	array_push($this->massage, $responseFinalMassage);
+		// }
+		// $this -> checkSqlErrors();
 
-		$response = array(
-			'status' => array(
-				'statusCode' => $this->statusCode,
-				'status' => self::$status[$this->statusCode],
-				'timestamp' => time(),
-				'responseTime' => 0,
-				'massage' => $this->massage
-			),
-			'data' => $this->responseData
-		);
+		$response = $this->responseData;
+
 		$GLOBALS['db'] -> query(
 			"INSERT INTO nwaRequest (
 				statusCode,
