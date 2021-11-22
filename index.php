@@ -32,7 +32,7 @@ if ($GLOBALS['db']->connect_error)
 	exit($GLOBALS['db']->connect_error);
 $GLOBALS['db']->set_charset("utf8");
 nwa\createDatabaseTables();
-appCreateNwaDatabaseTables();
+app\createDatabaseTables();
 
 // NULL Not set variables
 $GLOBALS['nwaApi'] = new nwa\api();
