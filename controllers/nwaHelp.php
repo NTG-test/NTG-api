@@ -20,6 +20,7 @@ class nwaAcceptedRequestHelp {
 	}
 
 	function __destruct() {
+		echo 999;
 	}
 }
 
