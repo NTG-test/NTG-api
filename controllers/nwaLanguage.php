@@ -1,5 +1,11 @@
 <?php
 
+// class nwaPhrase {
+// 	public $selector;
+// 	public $attribute;
+// 	public $trans;
+// }
+
 function GET() {
 	if (!$GLOBALS['nwaApi']->id) $GLOBALS['nwaApi']->done(400, 'langCodeIsNotSet');
 		

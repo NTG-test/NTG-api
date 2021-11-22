@@ -11,7 +11,7 @@ class nwaApi {
 	public $businessId;
 
 	public $statusCode;
-	public $responseData = array();
+	public $response = array();
 
 	private static $status = array(
 		// 661 => 'HTTP/1.1 661 nwaMySqldatabaseConnectionError',
@@ -58,21 +58,16 @@ class nwaApi {
 		505 => 'HTTP/1.1 505 HTTP Version Not Supported'
 	);
 
-	// private function checkSqlErrors() {
-	// 	if ($GLOBALS['db']->error) {
-	// 		array_push($this->massage, 'sqlError: '.$GLOBALS['db']->error);
-	// 	}
-	// }
-
 	//Exit request, create response, log in db
 	function done($statusCode, $responseFinalMassage = null) {
 		$this->statusCode = $statusCode;
-		// if (isset($responseFinalMassage)) {
-		// 	array_push($this->massage, $responseFinalMassage);
-		// }
-		// $this -> checkSqlErrors();
 
-		$response = $this->responseData;
+		if (isset($responseFinalMassage)) {
+			$this->response = $responseFinalMassage;
+		}
+		if ($GLOBALS['db']->error) {
+			$this->response = 'sqlError: '.$GLOBALS['db']->error);
+		}
 
 		$GLOBALS['db'] -> query(
 			"INSERT INTO nwaRequest (
@@ -87,7 +82,7 @@ class nwaApi {
 				token
 			) VALUES (
 				'".$this->statusCode."',
-				'".json_encode($response, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT)."',
+				'".json_encode($this->response, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT)."',
 				'".time()."',
 				'".$this->controller."',
 				'".$this->method."',
@@ -103,13 +98,13 @@ class nwaApi {
 				'nexnema@gmail.com',
 				'Cleveraj Log '.$this->statusCode,
 				'Ip: '.$this->ip.'<br>'.
-				'Response: '.json_encode($response, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT).'<br>'.
+				'Response: '.json_encode($this->response, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT).'<br>'.
 				'Token: '.$this->token.'<br>'
 				// 'MIME-Version: 1.0\r\nContent-type:text/html;charset=UTF-8\r\nFrom: noreply@cleveraj.com'
 			);
 		}
 
 		header(self::$status[$statusCode]);
-		exit(json_encode($response, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT));
+		exit(json_encode($this->response, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT));
 	}
 }
