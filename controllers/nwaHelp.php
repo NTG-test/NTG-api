@@ -1,7 +1,5 @@
 <?php
 
-namespace nwa;
-
 class nwaAcceptedRequestHelp {
 	private $file;
 	public $controller;
