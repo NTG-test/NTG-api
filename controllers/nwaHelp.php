@@ -22,6 +22,6 @@ function GET() {
 		$nwaAcceptedRequestHelp->getHelpDataForController($file);
 		array_push($GLOBALS['nwaApi']->response, $nwaAcceptedRequestHelp);
 	}
-	$GLOBALS['nwaApi']->done(200);
+	$GLOBALS['nwaApi']->done(200, 'ZZZZ');
 }
 
