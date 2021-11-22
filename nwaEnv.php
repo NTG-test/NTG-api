@@ -7,7 +7,7 @@ class nwaEnv
      *
      * @var string
      */
-    protected $path = '.env';
+    protected $path;
 
 
     public function __construct(string $path)
