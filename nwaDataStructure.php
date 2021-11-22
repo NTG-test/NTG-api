@@ -6,10 +6,10 @@ function createDatabaseTables() {
 	$GLOBALS['db']->query(
 		"CREATE TABLE IF NOT EXISTS nwaUser (
 		id INT(16) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-		time INT(16)
+		time INT(16),
 		username VARCHAR(64),
 		email VARCHAR(128),
-		name VARCHAR(64),
+		name VARCHAR(64)
 		) CHARSET=utf8 COLLATE utf8_unicode_ci"
 	);
 	$GLOBALS['db']->query(
