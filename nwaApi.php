@@ -18,7 +18,7 @@ class api {
 	private $response;
 
 	function __construct() {
-		$this->adminMailAddress = $_ENV['ADMIN_EMAIL_ADDRESS'];
+		if (isset($_ENV['ADMIN_EMAIL_ADDRESS']))	$this->adminMailAddress = $_ENV['ADMIN_EMAIL_ADDRESS'];
 		if (isset($_SERVER['REMOTE_ADDR']))			$this->ip = $_SERVER['REMOTE_ADDR'];
 		if (isset($_SERVER['HTTP_AUTHORIZATION']))	$this->token = $_SERVER['HTTP_AUTHORIZATION'];
 		if (isset($_GET['controller']))				$this->controller = $_GET['controller'];
