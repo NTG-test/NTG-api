@@ -31,7 +31,6 @@ function GET() {
 			$nwaAcceptedRequestHelp = new nwa\acceptedRequestHelp($file)
 		);
 	}
-new nwa\env('.env');
 
 	$GLOBALS['nwaApi']->done(200);
 }
