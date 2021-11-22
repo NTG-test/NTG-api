@@ -104,7 +104,8 @@ class nwaApi {
 			);
 		}
 
-		header(self::$status[$statusCode]);
+		// header(self::$status[$statusCode]);
+		http_response_code($statusCode);
 		exit(json_encode($this->response, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT));
 	}
 }
