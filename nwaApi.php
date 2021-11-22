@@ -26,7 +26,7 @@ class nwaApi {
 		
 		$GLOBALS['db'] -> query(
 			"INSERT INTO nwaRequest (
-				statusCode,
+				httpResponseCode,
 				response,
 				time,
 				controller,
@@ -36,7 +36,7 @@ class nwaApi {
 				remoteAddr,
 				token
 			) VALUES (
-				'".$this->statusCode."',
+				'".$this->httpResponseCode."',
 				'".json_encode($this->response, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT)."',
 				'".time()."',
 				'".$this->controller."',
@@ -45,25 +45,25 @@ class nwaApi {
 				'".$this->id."',
 				'".$this->ip."',
 				'".$this->token."'
-				)
-				");
-				
-				if ($this->statusCode >= 300) {
-					mail(
-						'nexnema@gmail.com',
-						'Cleveraj Log '.$this->statusCode,
-						'Ip: '.$this->ip.'<br>'.
-						'Response: '.json_encode($this->response, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT).'<br>'.
-						'Token: '.$this->token.'<br>'
-						// 'MIME-Version: 1.0\r\nContent-type:text/html;charset=UTF-8\r\nFrom: noreply@cleveraj.com'
-					);
-				}
-				
-				http_response_code($this->httpResponseCode);
-				if (is_array($this->response)) {
-					exit(json_encode($this->response, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT));
-				} else {
-					exit($this->response);
-				}
-			}
+			)
+		");
+		
+		if ($this->httpResponseCode >= 300) {
+			mail(
+				'nexnema@gmail.com',
+				'NWA API Log '.$this->httpResponseCode,
+				'Ip: '.$this->ip.'<br>'.
+				'Response: '.json_encode($this->response, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT).'<br>'.
+				'Token: '.$this->token.'<br>'
+				// 'MIME-Version: 1.0\r\nContent-type:text/html;charset=UTF-8\r\nFrom: noreply@cleveraj.com'
+			);
 		}
+
+		http_response_code($this->httpResponseCode);
+		if (is_array($this->response)) {
+			exit(json_encode($this->response, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT));
+		} else {
+			exit($this->response);
+		}
+	}
+}

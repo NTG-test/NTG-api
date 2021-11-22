@@ -7,7 +7,7 @@ function nwaCreateNwaDatabaseTables() {
 		time INT(4),
 		userId INT(16),
 		businessId INT(16),
-		statusCode INT(4),
+		httpResponseCode INT(4),
 		controller VARCHAR(32),
 		method VARCHAR(16),
 		action VARCHAR(32),
