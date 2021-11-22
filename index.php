@@ -13,9 +13,6 @@ header('Pragma: no-cache');
 // Accept OPTION request from browser to test secure line
 if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') exit();
 
-// Libraries
-require '../nwaDb.php'; //must be ENV file
-// nwaDb.php example: const DB=array('username'=>'***','password'=>'***','name'=>'***');
 require 'nwaEnv.php';
 new nwa\env('.env');
 require 'app/app.php';
