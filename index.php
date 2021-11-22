@@ -33,7 +33,7 @@ $GLOBALS['db'] = new mysqli(
 	DB['name']
 );
 if ($GLOBALS['db']->connect_error)
-	done(200, $GLOBALS['db']->connect_error);
+	exit($GLOBALS['db']->connect_error);
 $GLOBALS['db']->set_charset("utf8");
 nwaCreateNwaDatabaseTables();
 appCreateNwaDatabaseTables();
