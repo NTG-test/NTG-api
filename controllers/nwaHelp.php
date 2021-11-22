@@ -8,9 +8,6 @@ class nwaAcceptedRequestHelp {
 	function __construct($file) {
 		$this->file = $file;
 	}
-	function __destruct() {
-		$this->getHelpDataForController();
-	}
 
 	public function getHelpDataForController() {
 		$fileName = pathinfo($this->file)['filename'];
@@ -19,6 +16,10 @@ class nwaAcceptedRequestHelp {
 		foreach ($functionList[1] as $functionName)
 		if (in_array($functionName, array('GET', 'PUT', 'POST', 'DELETE', 'OPTIONS')))
 			array_push($this->methods, $functionName);
+	}
+
+	function __destruct() {
+		$this->getHelpDataForController();
 	}
 }
 
