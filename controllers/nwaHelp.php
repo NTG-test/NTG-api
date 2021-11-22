@@ -12,7 +12,7 @@ class nwaAcceptedRequestHelp {
 		$this->getHelpDataForController();
 	}
 
-	private function getHelpDataForController() {
+	public function getHelpDataForController() {
 		$fileName = pathinfo($this->file)['filename'];
 		preg_match_all('/function (\w+)/', file_get_contents($this->file), $functionList);
 		$this->controller = $fileName;
@@ -26,9 +26,10 @@ class nwaAcceptedRequestHelp {
 // API supported controllers & methods Help List
 function GET() {
 	foreach(glob('controllers/*.php') as $file) {
+		$nwaAcceptedRequestHelp = new nwaAcceptedRequestHelp($file);
 		array_push(
 			$GLOBALS['nwaApi']->data,
-			$nwaAcceptedRequestHelp = new nwaAcceptedRequestHelp($file)
+			$nwaAcceptedRequestHelp
 		);
 	}
 	$GLOBALS['nwaApi']->done(200);
