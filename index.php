@@ -36,7 +36,7 @@ $GLOBALS['db']->set_charset("utf8");
 nwaCreateNwaDatabaseTables();
 appCreateNwaDatabaseTables();
 
-$z = new nwaEnv('.env')->load();
+(new nwaEnv('.env'))->load();
 exit(getenv('DATABASE_HOST'));
 
 // NULL Not set variables
