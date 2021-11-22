@@ -41,7 +41,7 @@ $z = new nwaEnv('.env');
 // NULL Not set variables
 $GLOBALS['nwaApi'] = new nwaApi();
 
-exit(getenv('DATABASE_HOST');
+exit(getenv('DATABASE_HOST'));
 
 // Only Accept over HTTPS
 if (!$_SERVER['HTTPS'])
