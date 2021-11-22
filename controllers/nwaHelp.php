@@ -10,7 +10,7 @@ class nwaAcceptedRequestHelp {
 		$this->getHelpDataForController();
 	}
 
-	public function getHelpDataForController() {
+	private function getHelpDataForController() {
 		$fileName = pathinfo($this->file)['filename'];
 		preg_match_all('/function (\w+)/', file_get_contents($this->file), $functionList);
 		$this->controller = $fileName;
@@ -18,20 +18,16 @@ class nwaAcceptedRequestHelp {
 		if (in_array($functionName, array('GET', 'PUT', 'POST', 'DELETE', 'OPTIONS')))
 			array_push($this->methods, $functionName);
 	}
-
-	function __destruct() {
-		echo 999;
-	}
 }
 
 
 // API supported controllers & methods Help List
 function GET() {
 	foreach(glob('controllers/*.php') as $file) {
-		$nwaAcceptedRequestHelp = new nwaAcceptedRequestHelp($file);
+		// $nwaAcceptedRequestHelp = new nwaAcceptedRequestHelp($file);
 		array_push(
 			$GLOBALS['nwaApi']->data,
-			$nwaAcceptedRequestHelp
+			$nwaAcceptedRequestHelp = new nwaAcceptedRequestHelp($file)
 		);
 	}
 	$GLOBALS['nwaApi']->done(200);
