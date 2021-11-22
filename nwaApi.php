@@ -16,13 +16,13 @@ class nwaApi {
 	private $response;
 
 	function __construct() {
-		$GLOBALS['nwaApi']->adminMailAddress = 'nexnema@gmail.com';
-		if (isset($_SERVER['REMOTE_ADDR']))			$GLOBALS['nwaApi']->ip = $_SERVER['REMOTE_ADDR'];
-		if (isset($_SERVER['HTTP_AUTHORIZATION']))	$GLOBALS['nwaApi']->token = $_SERVER['HTTP_AUTHORIZATION'];
-		if (isset($_GET['controller']))				$GLOBALS['nwaApi']->controller = $_GET['controller'];
-		if (isset($_SERVER['REQUEST_METHOD']))		$GLOBALS['nwaApi']->method = $_SERVER['REQUEST_METHOD'];
-		if (isset($_GET['action']))					$GLOBALS['nwaApi']->action = $_GET['action'];
-		if (isset($_GET['id']))						$GLOBALS['nwaApi']->id = $_GET['id'];
+		$this->adminMailAddress = 'nexnema@gmail.com';
+		if (isset($_SERVER['REMOTE_ADDR']))			$this->ip = $_SERVER['REMOTE_ADDR'];
+		if (isset($_SERVER['HTTP_AUTHORIZATION']))	$this->token = $_SERVER['HTTP_AUTHORIZATION'];
+		if (isset($_GET['controller']))				$this->controller = $_GET['controller'];
+		if (isset($_SERVER['REQUEST_METHOD']))		$this->method = $_SERVER['REQUEST_METHOD'];
+		if (isset($_GET['action']))					$this->action = $_GET['action'];
+		if (isset($_GET['id']))						$this->id = $_GET['id'];
 	}
 
 	// Create response, Exit request
