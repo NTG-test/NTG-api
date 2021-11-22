@@ -16,6 +16,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') exit();
 // Libraries
 require '../nwaDb.php'; //must be ENV file
 // nwaDb.php example: const DB=array('username'=>'***','password'=>'***','name'=>'***');
+require 'nwaEnv.php';
 require 'app/app.php';
 require 'nwaFunctions.php';
 require 'nwaDataStructure.php';
