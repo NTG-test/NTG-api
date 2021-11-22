@@ -1,10 +1,12 @@
 <?php
 
 class surah {
+	public $id;
 	public $name;
 	public $period;
 
-	function __construct($name, $period) {
+	function __construct($id, $name, $period) {
+		$this->id = $id;
 		$this->name = $name;
 		$this->period = $period;
 	}
