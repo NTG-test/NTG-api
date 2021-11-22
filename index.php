@@ -36,12 +36,13 @@ $GLOBALS['db']->set_charset("utf8");
 nwaCreateNwaDatabaseTables();
 appCreateNwaDatabaseTables();
 
-$z = new nwaEnv('.env');
+//$z = new nwaEnv('.env');
+putenv('DATA=zxc');
+exit(getenv('DATA'));
 
 // NULL Not set variables
 $GLOBALS['nwaApi'] = new nwaApi();
 
-exit(getenv('DATABASE_HOST'));
 
 // Only Accept over HTTPS
 if (!$_SERVER['HTTPS'])
