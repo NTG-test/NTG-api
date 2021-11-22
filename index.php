@@ -24,13 +24,6 @@ require 'nwaApi.php';
 
 // NULL Not set variables
 $GLOBALS['nwaApi'] = new nwaApi();
-$GLOBALS['nwaApi']->adminMailAddress = 'nexnema@gmail.com';
-if (isset($_SERVER['REMOTE_ADDR']))			$GLOBALS['nwaApi']->ip = $_SERVER['REMOTE_ADDR'];
-if (isset($_SERVER['HTTP_AUTHORIZATION']))	$GLOBALS['nwaApi']->token = $_SERVER['HTTP_AUTHORIZATION'];
-if (isset($_GET['controller']))				$GLOBALS['nwaApi']->controller = $_GET['controller'];
-if (isset($_SERVER['REQUEST_METHOD']))		$GLOBALS['nwaApi']->method = $_SERVER['REQUEST_METHOD'];
-if (isset($_GET['action']))					$GLOBALS['nwaApi']->action = $_GET['action'];
-if (isset($_GET['id']))						$GLOBALS['nwaApi']->id = $_GET['id'];
 
 // Connect database
 $GLOBALS['db'] = new mysqli(
