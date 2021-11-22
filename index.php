@@ -22,9 +22,6 @@ require 'nwaDataStructure.php';
 require 'app/dataStructure.php';
 require 'nwaApi.php';
 
-// NULL Not set variables
-$GLOBALS['nwaApi'] = new nwaApi();
-
 // Connect database
 $GLOBALS['db'] = new mysqli(
 	'localhost',
@@ -37,6 +34,9 @@ if ($GLOBALS['db']->connect_error)
 $GLOBALS['db']->set_charset("utf8");
 nwaCreateNwaDatabaseTables();
 appCreateNwaDatabaseTables();
+
+// NULL Not set variables
+$GLOBALS['nwaApi'] = new nwaApi();
 
 // Only Accept over HTTPS
 if (!$_SERVER['HTTPS'])
