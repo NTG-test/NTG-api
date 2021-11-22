@@ -66,8 +66,8 @@ class nwaApi {
 			$this->response = json_encode($this->data, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);
 		}
 
-		logRequestAndResponseToDb();
-		emailErrorToAdmin();
+		$this->logRequestAndResponseToDb();
+		$this->emailErrorToAdmin();
 
 		http_response_code($this->httpResponseCode);
 		exit($this->response);
