@@ -30,6 +30,6 @@ function GET() {
 		);
 	}
 
-	$GLOBALS['nwaApi']->done(200);
+	$GLOBALS['nwaApi']->done(404, 'zert');
 }
 
