@@ -22,9 +22,10 @@ require 'nwaDataStructure.php';
 require 'app/dataStructure.php';
 require 'nwaApi.php';
 
-function() {
+function main() {
 	echo 'Hello World!';
 }
+main();
 
 // Connect database
 $GLOBALS['db'] = new mysqli(
