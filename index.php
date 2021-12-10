@@ -11,11 +11,16 @@ header('Content-Type: application/json');
 header('Cache-Control: no-cache');
 header('Pragma: no-cache');
 
+// Only Accept over HTTPS
+if (!$_SERVER['HTTPS']) {
+	http_response_code(505);
+	exit();
+}
+
 // Accept OPTION request from browser to test secure line
 if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') exit();
 
 require 'nwaEnv.php';
-new nwa\env('.env');
 require 'app/app.php';
 require 'nwaFunctions.php';
 require 'nwaDataStructure.php';
@@ -23,6 +28,7 @@ require 'app/dataStructure.php';
 require 'nwaApi.php';
 
 function main() {
+	new nwa\env('.env');
 	echo 'Hello World!';
 }
 main();
@@ -40,12 +46,8 @@ $GLOBALS['db']->set_charset("utf8");
 nwa\createDatabaseTables();
 app\createDatabaseTables();
 
-// NULL Not set variables
 $GLOBALS['nwaApi'] = new nwa\api();
 
-// Only Accept over HTTPS
-if (!$_SERVER['HTTPS'])
-	$GLOBALS['nwaApi']->done(505, 'requiredSecureHttpsProtocol');
 
 // Reject Other Origins
 // if (!in_array($_SERVER['HTTP_ORIGIN'], $GLOBALS['nwaApp']['allowedOrigins']))
@@ -80,7 +82,6 @@ $GLOBALS['nwaApi']->done(204, 'nothingDone');
 $GLOBALS['nwaApp']		Data to handle api permissions
 $GLOBALS['nwaDb']		Class: Data to connect database
 $GLOBALS['nwaApi']		Class: Main API massages, data, response
-DB						Main Database Connection
 
 api.com/controller
 api.com/controller/id

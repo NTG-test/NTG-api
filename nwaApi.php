@@ -6,7 +6,7 @@ class api {
 	public $adminMailAddress;
 	public $ip;
 	public $token;
-	public $controller;
+	const $controller = $_GET['controller'];;
 	public $method;
 	public $action;
 	public $id;
