@@ -6,7 +6,7 @@ class api {
 	public $adminMailAddress;
 	public $ip;
 	public $token;
-	const $controller = $_GET['controller'];;
+	public $controller;
 	public $method;
 	public $action;
 	public $id;
@@ -21,7 +21,7 @@ class api {
 		if (isset($_ENV['ADMIN_EMAIL_ADDRESS']))	$this->adminMailAddress = $_ENV['ADMIN_EMAIL_ADDRESS'];
 		if (isset($_SERVER['REMOTE_ADDR']))			$this->ip = $_SERVER['REMOTE_ADDR'];
 		if (isset($_SERVER['HTTP_AUTHORIZATION']))	$this->token = $_SERVER['HTTP_AUTHORIZATION'];
-		// if (isset($_GET['controller']))				$this->controller = $_GET['controller'];
+		if (isset($_GET['controller']))				$this->controller = $_GET['controller'];
 		if (isset($_SERVER['REQUEST_METHOD']))		$this->method = $_SERVER['REQUEST_METHOD'];
 		if (isset($_GET['action']))					$this->action = $_GET['action'];
 		if (isset($_GET['id']))						$this->id = $_GET['id'];
