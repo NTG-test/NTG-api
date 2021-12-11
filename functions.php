@@ -1,7 +1,9 @@
 <?php
 
+namespace api;
+
 //CURL
-function nwaCurl($url, $parameters, $headers) {
+function curl($url, $parameters, $headers) {
 	$queryString = http_build_query($parameters);	// query string encode the parameters
 	$requestUrl = "{$url}?{$queryString}";			// create the request URL
 	$curl = curl_init();							// Get cURL resource
