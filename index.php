@@ -24,7 +24,13 @@ require 'env.php';
 require 'api.php';
 require 'functions.php';
 
-function api() {
+/*
+api.com/controller
+api.com/controller/id
+api.com/controller/action/id
+*/
+
+function main() {
 	new api\env('.env');
 	
 	// Connect database
@@ -35,7 +41,7 @@ function api() {
 		$_ENV['DATABASE_NAME']
 	);
 	if ($db->connect_error)
-		exit($db->connect_error);
+	exit($db->connect_error);
 	$db->set_charset("utf8");
 	//SQL
 	foreach(glob('controllers/*.sql') as $file) {
@@ -44,6 +50,16 @@ function api() {
 		while($db->more_results()) {
 			$db->next_result();
 			$db->use_result();
+		}
+	}
+	
+	// Convert POST data (JSON) to Object
+	$_POST = json_decode(file_get_contents('php://input'), true);
+	
+	// Protect on SQL Injection attacks
+	if (is_object($_POST)) {
+		foreach($_POST as $key => $value) {
+			$_POST[$key] = $GLOBALS['db']->real_escape_string($value);
 		}
 	}
 
@@ -73,7 +89,7 @@ function api() {
 	return $response->data;
 }
 
-exit(json_encode(api(), JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT));
+exit(json_encode(main(), JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT));
 
 
 
@@ -86,15 +102,6 @@ exit(json_encode(api(), JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT));
 
 
 
-// Convert POST data (JSON) to Object
-$_POST = json_decode(file_get_contents('php://input'), true);
-
-// Protect on SQL Injection attacks
-if (is_object($_POST)) {
-	foreach($_POST as $key => $value) {
-		$_POST[$key] = $GLOBALS['db']->real_escape_string($value);
-	}
-}
 
 	// $GLOBALS['nwaApp'] = array(
 	// 	'allowedOrigins' => array(
@@ -111,15 +118,8 @@ if (is_object($_POST)) {
 	// 		'database'
 	// 	)
 	// );
+
 // Reject Other Origins
 // if (!in_array($_SERVER['HTTP_ORIGIN'], $GLOBALS['nwaApp']['allowedOrigins']))
 // 	$GLOBALS['nwaApi']->done(403, 'originNotAllowed');
 
-
-
-
-/*
-api.com/controller
-api.com/controller/id
-api.com/controller/action/id
-*/
