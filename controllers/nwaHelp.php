@@ -31,6 +31,6 @@ function GET() {
 		);
 	}
 
-	return new nwa\response(200, $data);
+	return new api\response(200, $data);
 }
 
