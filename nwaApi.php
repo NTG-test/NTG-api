@@ -66,16 +66,15 @@ class response {
 	private $httpResponseCode;
 	public $response = array();
 
-	public function __construct($httpResponseCode, $responseFinalMassage = null) {
+	public function __construct($httpResponseCode, $response = null) {
 		$this->httpResponseCode = $httpResponseCode;
 		
-		if (isset($responseFinalMassage)) {
-			$this->response = $responseFinalMassage;
+		if (isset($response)) {
+			$this->response = $response;
 		} else if ($GLOBALS['db']->error) {
 			$this->response = 'sqlError: '.$GLOBALS['db']->error;
 		}
 
 		http_response_code($this->httpResponseCode);
-		exit($this->response);
 	}
 }
