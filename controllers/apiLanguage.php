@@ -22,6 +22,8 @@ function GET($db, $id) {
 
 	$data = array();
 	$result = $db->query("SELECT * FROM nwaLanguage");
+	if ($db->error) exit($db->error);
+
 	while($row = $result->fetch_assoc()) {
 		array_push(
 			$data,

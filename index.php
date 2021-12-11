@@ -40,6 +40,7 @@ function api() {
 	// nwa\createDatabaseTables($db);
 	$sql = file_get_contents('dataStructure.sql');   
 	$db->multi_query($sql);
+	if ($db->error) exit($db->error);
 
 	$request = new api\request();
 	

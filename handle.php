@@ -71,8 +71,6 @@ class response {
 		
 		if (isset($response)) {
 			$this->response = $response;
-		} else if ($GLOBALS['db']->error) {
-			$this->response = 'sqlError: '.$GLOBALS['db']->error;
 		}
 
 		http_response_code($this->httpResponseCode);
