@@ -1,6 +1,6 @@
 <?php
 
-class nwaPhrase {
+class phrase {
 	public $selector;
 	public $attribute;
 	public $phrase;
@@ -12,25 +12,25 @@ class nwaPhrase {
 	}
 }
 
-function GET() {
-	if (!$GLOBALS['nwaApi']->id) $GLOBALS['nwaApi']->done(400, 'langCodeIsNotSet');
+function GET($db, $id) {
+	if (!$id) return new api\response(400, 'langCodeIsNotSet');
 		
 	$allowedLang = array('enUS', 'ar', 'fa');
-	if (!in_array($GLOBALS['nwaApi']->id, $allowedLang)) {
-		$GLOBALS['nwaApi']->done(404, 'langCodeNotFound');
+	if (!in_array($id, $allowedLang)) {
+		return new api\response(404, 'langCodeNotFound');
 	}
 
-	$result = $GLOBALS['db']->query("SELECT * FROM nwaLanguage");
+	$data = array();
+	$result = $db->query("SELECT * FROM nwaLanguage");
 	while($row = $result->fetch_assoc()) {
 		array_push(
-			$GLOBALS['nwaApi']->data,
-			$nwaPhrase = new nwaPhrase(
+			$data,
+			$phrase = new phrase(
 				$row['selector'],
 				$row['attribute'],
 				$row[$GLOBALS['nwaApi']->id]
 			)
 		);
 	}
-
-	$GLOBALS['nwaApi']->done(200);
+	return new api\response(200, $data);
 }

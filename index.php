@@ -50,7 +50,7 @@ function api() {
 	}
 	//Method function
 	if (function_exists($request->method)) {
-		$response = ($request->method)();
+		$response = ($request->method)($db, $request->id);
 	} else {
 		$response = new api\response(405, 'methodNotAllowed');
 	}
