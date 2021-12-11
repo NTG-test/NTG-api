@@ -52,7 +52,7 @@ function main() {
 		$response = new nwa\response(404, 'controllerNotFound');
 	}
 	//Method function
-	if (function_exists($GLOBALS['nwaApi']->method)) {
+	if (function_exists($request->method)) {
 		$response = ($request->method)();
 	} else {
 		$response = new nwa\response(405, 'methodNotAllowed');
