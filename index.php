@@ -39,7 +39,6 @@ function zzz() {
 		exit($db->connect_error);
 	$db->set_charset("utf8");
 	nwa\createDatabaseTables($db);
-	app\createDatabaseTables($db);
 
 	$request = new api\request();
 	
