@@ -25,7 +25,7 @@ function GET($db, $id) {
 	while($row = $result->fetch_assoc()) {
 		array_push(
 			$data,
-			$phrase = new phrase(
+			new phrase(
 				$row['selector'],
 				$row['attribute'],
 				$row[$GLOBALS['nwaApi']->id]
