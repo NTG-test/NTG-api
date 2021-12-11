@@ -21,10 +21,8 @@ if (!$_SERVER['HTTPS']) {
 if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') exit();
 
 require 'apiEnv.php';
-require 'app/app.php';
 require 'apiFunctions.php';
 require 'apiDataStructure.php';
-require 'app/dataStructure.php';
 require 'apiHandle.php';
 
 function zzz() {
@@ -90,6 +88,22 @@ if (is_object($_POST)) {
 		$_POST[$key] = $GLOBALS['db']->real_escape_string($value);
 	}
 }
+
+	// $GLOBALS['nwaApp'] = array(
+	// 	'allowedOrigins' => array(
+	// 		'',
+	// 		'https://api.nategh.org',
+	// 		'https://nategh.nategh.org'
+	// 	),
+	// 	'allowController' => array(
+	// 		'language',
+	// 		'account',
+	// 		'profile',
+	// 		'logout',
+	// 		'overview',
+	// 		'database'
+	// 	)
+	// );
 // Reject Other Origins
 // if (!in_array($_SERVER['HTTP_ORIGIN'], $GLOBALS['nwaApp']['allowedOrigins']))
 // 	$GLOBALS['nwaApi']->done(403, 'originNotAllowed');
