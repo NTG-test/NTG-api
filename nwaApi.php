@@ -67,8 +67,7 @@ class response {
 	public $data = array();
 	private $response;
 
-	// Create response, Exit request
-	public function done($httpResponseCode, $responseFinalMassage = null) {
+	public function __construct($httpResponseCode, $responseFinalMassage = null) {
 		$this->httpResponseCode = $httpResponseCode;
 		
 		if (isset($responseFinalMassage)) {

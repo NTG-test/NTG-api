@@ -49,16 +49,16 @@ function main() {
 	if (file_exists('controllers/'.$request->controller.'.php')) {
 		require 'controllers/'.$request->controller.'.php';
 	} else {
-		exit('controllerNotFound');
+		$response = new nwa\response(404, 'controllerNotFound');
 	}
 	//Method function
 	if (function_exists($GLOBALS['nwaApi']->method)) {
 		($request->method)();
 	} else {
-		exit('methodNotAllowed');
+		$response = new nwa\response(405, 'methodNotAllowed');
 	}
 
-	echo 'Hello World!';
+	exit($response);
 }
 main();
 
