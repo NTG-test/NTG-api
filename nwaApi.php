@@ -1,6 +1,6 @@
 <?php
 
-namespace nwa;
+namespace api;
 
 class request {
 	public $adminMailAddress;

@@ -28,7 +28,7 @@ require 'app/dataStructure.php';
 require 'nwaApi.php';
 
 function api() {
-	new nwa\env('.env');
+	new api\env('.env');
 	
 	// Connect database
 	$GLOBALS['db'] = new mysqli(
@@ -43,19 +43,19 @@ function api() {
 	nwa\createDatabaseTables();
 	app\createDatabaseTables();
 
-	$request = new nwa\request();
+	$request = new api\request();
 	
 	//Controller
 	if (file_exists('controllers/'.$request->controller.'.php')) {
 		require 'controllers/'.$request->controller.'.php';
 	} else {
-		$response = new nwa\response(404, 'controllerNotFound');
+		$response = new api\response(404, 'controllerNotFound');
 	}
 	//Method function
 	if (function_exists($request->method)) {
 		$response = ($request->method)();
 	} else {
-		$response = new nwa\response(405, 'methodNotAllowed');
+		$response = new api\response(405, 'methodNotAllowed');
 	}
 
 		// $this->logRequestAndResponseToDb();
