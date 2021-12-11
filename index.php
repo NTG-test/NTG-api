@@ -31,17 +31,17 @@ function zzz() {
 	new api\env('.env');
 	
 	// Connect database
-	$GLOBALS['db'] = new mysqli(
+	$db = new mysqli(
 		$_ENV['DATABASE_HOST'],
 		$_ENV['DATABASE_USER'],
 		$_ENV['DATABASE_PASSWORD'],
 		$_ENV['DATABASE_NAME']
 	);
-	if ($GLOBALS['db']->connect_error)
-		exit($GLOBALS['db']->connect_error);
-	$GLOBALS['db']->set_charset("utf8");
-	nwa\createDatabaseTables();
-	app\createDatabaseTables();
+	if ($db->connect_error)
+		exit($db->connect_error);
+	$db->set_charset("utf8");
+	nwa\createDatabaseTables($db);
+	app\createDatabaseTables($db);
 
 	$request = new api\request();
 	

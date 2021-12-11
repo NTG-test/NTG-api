@@ -2,7 +2,7 @@
 
 namespace app;
 
-function createDatabaseTables() {
+function createDatabaseTables($db) {
 	// if (!$GLOBALS['db'] -> query('DESCRIBE appCoins')) {
 	// 	$GLOBALS['db'] -> query(
 	// 		"CREATE TABLE IF NOT EXISTS appCoins (
