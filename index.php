@@ -27,21 +27,22 @@ require 'nwaDataStructure.php';
 require 'app/dataStructure.php';
 require 'nwaApi.php';
 
-// Connect database
-$GLOBALS['db'] = new mysqli(
-	$_ENV['DATABASE_HOST'],
-	$_ENV['DATABASE_USER'],
-	$_ENV['DATABASE_PASSWORD'],
-	$_ENV['DATABASE_NAME']
-);
-if ($GLOBALS['db']->connect_error)
-	exit($GLOBALS['db']->connect_error);
-$GLOBALS['db']->set_charset("utf8");
-nwa\createDatabaseTables();
-app\createDatabaseTables();
-
 function main() {
 	new nwa\env('.env');
+	
+	// Connect database
+	$GLOBALS['db'] = new mysqli(
+		$_ENV['DATABASE_HOST'],
+		$_ENV['DATABASE_USER'],
+		$_ENV['DATABASE_PASSWORD'],
+		$_ENV['DATABASE_NAME']
+	);
+	if ($GLOBALS['db']->connect_error)
+		exit($GLOBALS['db']->connect_error);
+	$GLOBALS['db']->set_charset("utf8");
+	nwa\createDatabaseTables();
+	app\createDatabaseTables();
+
 	$request = new nwa\request();
 	
 	//Controller
