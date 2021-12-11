@@ -55,8 +55,12 @@ function api() {
 		$response = new api\response(405, 'methodNotAllowed');
 	}
 
-		// $this->logRequestAndResponseToDb();
-		// $this->emailErrorToAdmin();
+	// $this->logRequestAndResponseToDb();
+	// $this->emailErrorToAdmin();
+
+	if (!isset($response)) {
+		$response = new api\response(204, 'nothingDone');
+	}
 
 	return $response;
 }
@@ -71,10 +75,6 @@ exit(json_encode(api(), JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT));
 
 
 
-
-
-
-$GLOBALS['nwaApi'] = new nwa\api();
 
 
 
@@ -109,13 +109,8 @@ if (is_object($_POST)) {
 
 
 
-$GLOBALS['nwaApi']->done(204, 'nothingDone');
 
 /*
-$GLOBALS['nwaApp']		Data to handle api permissions
-$GLOBALS['nwaDb']		Class: Data to connect database
-$GLOBALS['nwaApi']		Class: Main API massages, data, response
-
 api.com/controller
 api.com/controller/id
 api.com/controller/action/id
