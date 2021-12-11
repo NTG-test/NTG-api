@@ -27,7 +27,7 @@ require 'nwaDataStructure.php';
 require 'app/dataStructure.php';
 require 'nwaApi.php';
 
-function main() {
+function api() {
 	new nwa\env('.env');
 	
 	// Connect database
@@ -61,9 +61,21 @@ function main() {
 		// $this->logRequestAndResponseToDb();
 		// $this->emailErrorToAdmin();
 
-	exit($response);
+	return $response;
 }
-main();
+
+exit(json_encode(api(), JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT));
+
+
+
+
+
+
+
+
+
+
+
 
 $GLOBALS['nwaApi'] = new nwa\api();
 
