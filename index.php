@@ -37,20 +37,19 @@ function api() {
 	if ($db->connect_error)
 		exit($db->connect_error);
 	$db->set_charset("utf8");
-
-	$request = new api\request();
-
 	//SQL
-	if (file_exists('controllers/'.$request->controller.'.sql')) {
-		$db->multi_query(
-			file_get_contents('controllers/'.$request->controller.'.sql';);
-		);
+	foreach(glob('controllers/*.sql') as $file) {
+		$db->multi_query(file_get_contents($file));
 		if ($db->error) exit($db->error);
 		while($db->more_results()) {
 			$db->next_result();
 			$db->use_result();
 		}
 	}
+
+	$request = new api\request();
+
+
 	//Controller
 	if (file_exists('controllers/'.$request->controller.'.php')) {
 		require 'controllers/'.$request->controller.'.php';
