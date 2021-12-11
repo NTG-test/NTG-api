@@ -49,7 +49,6 @@ function api() {
 
 	$request = new api\request();
 
-
 	//Controller
 	if (file_exists('controllers/'.$request->controller.'.php')) {
 		require 'controllers/'.$request->controller.'.php';
