@@ -54,7 +54,7 @@ function api() {
 		require 'controllers/'.$request->controller.'.php';
 	} else {
 		$response = new api\response(404, 'controllerNotFound');
-		exit(json_encode(api(), JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT));
+		exit(json_encode($response, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT));
 	}
 
 	//Method function
