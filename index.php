@@ -40,12 +40,11 @@ function api() {
 	// nwa\createDatabaseTables($db);
 	$sql = file_get_contents('dataStructure.sql');   
 	$db->multi_query($sql);
-	while($db->more_results()) {
-    // 	$db->next_result();
-    // 	$db->use_result();
-	$db->store_result();
-	}
 	if ($db->error) exit($db->error);
+	while($db->more_results()) {
+		$db->next_result();
+		$db->use_result();
+	}
 
 	$request = new api\request();
 	
