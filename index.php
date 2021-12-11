@@ -27,7 +27,7 @@ require 'nwaDataStructure.php';
 require 'app/dataStructure.php';
 require 'nwaApi.php';
 
-function api() {
+function zzz() {
 	new api\env('.env');
 	
 	// Connect database
@@ -64,7 +64,7 @@ function api() {
 	return $response;
 }
 
-exit(json_encode(api(), JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT));
+exit(json_encode(zzz(), JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT));
 
 
 
