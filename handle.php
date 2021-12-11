@@ -13,7 +13,7 @@ class request {
 	public $userId;
 	public $businessId;
 
-	function __construct() {
+	public function __construct() {
 		if (isset($_ENV['ADMIN_EMAIL_ADDRESS']))	$this->adminMailAddress = $_ENV['ADMIN_EMAIL_ADDRESS'];
 		if (isset($_SERVER['REMOTE_ADDR']))			$this->ip = $_SERVER['REMOTE_ADDR'];
 		if (isset($_SERVER['HTTP_AUTHORIZATION']))	$this->token = $_SERVER['HTTP_AUTHORIZATION'];
