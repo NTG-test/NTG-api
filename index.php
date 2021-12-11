@@ -20,10 +20,10 @@ if (!$_SERVER['HTTPS']) {
 // Accept OPTION request from browser to test secure line
 if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') exit();
 
-require 'apiEnv.php';
-require 'apiFunctions.php';
-require 'apiDataStructure.php';
-require 'apiHandle.php';
+require 'env.php';
+require 'functions.php';
+require 'dataStructure.php';
+require 'handle.php';
 
 function api() {
 	new api\env('.env');
