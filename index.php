@@ -20,12 +20,12 @@ if (!$_SERVER['HTTPS']) {
 // Accept OPTION request from browser to test secure line
 if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') exit();
 
-require 'nwaEnv.php';
+require 'apiEnv.php';
 require 'app/app.php';
-require 'nwaFunctions.php';
-require 'nwaDataStructure.php';
+require 'apiFunctions.php';
+require 'apiDataStructure.php';
 require 'app/dataStructure.php';
-require 'nwaApi.php';
+require 'apiHandle.php';
 
 function zzz() {
 	new api\env('.env');
