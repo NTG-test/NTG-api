@@ -37,7 +37,6 @@ function api() {
 	if ($db->connect_error)
 		exit($db->connect_error);
 	$db->set_charset("utf8");
-	// nwa\createDatabaseTables($db);
 	$sql = file_get_contents('dataStructure.sql');   
 	$db->multi_query($sql);
 	if ($db->error) exit($db->error);
