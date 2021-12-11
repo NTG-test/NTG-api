@@ -53,7 +53,7 @@ function api() {
 	if (file_exists('controllers/'.$request->controller.'.php')) {
 		require 'controllers/'.$request->controller.'.php';
 	} else {
-		$response = new api\response(404, 'controllerNotFound');
+		exit(new api\response(404, 'controllerNotFound'));
 	}
 
 	//Method function
