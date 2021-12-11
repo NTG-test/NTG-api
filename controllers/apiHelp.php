@@ -1,6 +1,6 @@
 <?php
 
-class nwaAcceptedRequestHelp {
+class acceptedRequestHelp {
 	private $file;
 	public $controller;
 	public $methods = array();
@@ -22,15 +22,14 @@ class nwaAcceptedRequestHelp {
 
 
 // API supported controllers & methods Help List
-function GET() {
+function GET($db, $id) {
 	$data = array();
 	foreach(glob('controllers/*.php') as $file) {
 		array_push(
 			$data,
-			$nwaAcceptedRequestHelp = new nwaAcceptedRequestHelp($file)
+			new acceptedRequestHelp($file)
 		);
 	}
 
 	return new api\response(200, $data);
 }
-
