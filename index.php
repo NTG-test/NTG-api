@@ -53,7 +53,7 @@ function main() {
 	}
 	//Method function
 	if (function_exists($GLOBALS['nwaApi']->method)) {
-		($request->method)();
+		$response = ($request->method)();
 	} else {
 		$response = new nwa\response(405, 'methodNotAllowed');
 	}
