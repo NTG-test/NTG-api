@@ -64,14 +64,11 @@ class request {
 
 class response {
 	private $httpResponseCode;
-	public $response = array();
+	public $data = array();
 
-	public function __construct($httpResponseCode, $response = null) {
+	public function __construct($httpResponseCode, $responseData = null) {
 		$this->httpResponseCode = $httpResponseCode;
-		
-		if (isset($response)) {
-			$this->response = $response;
-		}
+		$this->data = $responseData;
 
 		http_response_code($this->httpResponseCode);
 	}

@@ -70,7 +70,7 @@ function api() {
 		$response = new api\response(204, 'nothingDone');
 	}
 
-	return $response;
+	return $response->data;
 }
 
 exit(json_encode(api(), JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT));
