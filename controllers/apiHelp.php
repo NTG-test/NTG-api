@@ -1,6 +1,6 @@
 <?php
 
-class acceptedRequestHelp {
+class acceptedRequestsHelp {
 	private $file;
 	public $controller;
 	public $methods = array();
@@ -27,7 +27,7 @@ function GET($db, $id) {
 	foreach(glob('controllers/*.php') as $file) {
 		array_push(
 			$data,
-			new acceptedRequestHelp($file)
+			new acceptedRequestsHelp($file)
 		);
 	}
 
