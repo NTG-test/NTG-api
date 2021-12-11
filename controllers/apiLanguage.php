@@ -28,7 +28,7 @@ function GET($db, $id) {
 			new phrase(
 				$row['selector'],
 				$row['attribute'],
-				$row[$GLOBALS['nwaApi']->id]
+				$row[$id]
 			)
 		);
 	}
