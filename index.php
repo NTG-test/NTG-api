@@ -52,16 +52,15 @@ function api() {
 	//Controller
 	if (file_exists('controllers/'.$request->controller.'.php')) {
 		require 'controllers/'.$request->controller.'.php';
+		//Method function
+		if (function_exists($request->method)) {
+			$response = ($request->method)($db, $request->id);
+		} else {
+			$response = new api\response(405, 'methodNotAllowed');
+			exit($response);
+		}
 	} else {
 		$response = new api\response(404, 'controllerNotFound');
-		exit(json_encode($response, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT));
-	}
-
-	//Method function
-	if (function_exists($request->method)) {
-		$response = ($request->method)($db, $request->id);
-	} else {
-		$response = new api\response(405, 'methodNotAllowed');
 	}
 
 	// $this->logRequestAndResponseToDb();
