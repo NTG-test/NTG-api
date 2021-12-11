@@ -27,12 +27,6 @@ require 'nwaDataStructure.php';
 require 'app/dataStructure.php';
 require 'nwaApi.php';
 
-function main() {
-	new nwa\env('.env');
-	echo 'Hello World!';
-}
-main();
-
 // Connect database
 $GLOBALS['db'] = new mysqli(
 	$_ENV['DATABASE_HOST'],
@@ -46,12 +40,30 @@ $GLOBALS['db']->set_charset("utf8");
 nwa\createDatabaseTables();
 app\createDatabaseTables();
 
+function main() {
+	new nwa\env('.env');
+	$request = new nwa\request();
+	
+	//Controller
+	if (file_exists('controllers/'.$request->controller.'.php')) {
+		require 'controllers/'.$request->controller.'.php';
+	} else {
+		exit('controllerNotFound');
+	}
+	//Method function
+	if (function_exists($GLOBALS['nwaApi']->method)) {
+		($request->method)();
+	} else {
+		exit('methodNotAllowed');
+	}
+
+	echo 'Hello World!';
+}
+main();
+
 $GLOBALS['nwaApi'] = new nwa\api();
 
 
-// Reject Other Origins
-// if (!in_array($_SERVER['HTTP_ORIGIN'], $GLOBALS['nwaApp']['allowedOrigins']))
-// 	$GLOBALS['nwaApi']->done(403, 'originNotAllowed');
 
 // Convert POST data (JSON) to Object
 $_POST = json_decode(file_get_contents('php://input'), true);
@@ -62,19 +74,11 @@ if (is_object($_POST)) {
 		$_POST[$key] = $GLOBALS['db']->real_escape_string($value);
 	}
 }
+// Reject Other Origins
+// if (!in_array($_SERVER['HTTP_ORIGIN'], $GLOBALS['nwaApp']['allowedOrigins']))
+// 	$GLOBALS['nwaApi']->done(403, 'originNotAllowed');
 
-//Controller
-if (file_exists('controllers/'.$GLOBALS['nwaApi']->controller.'.php')) {
-	require 'controllers/'.$GLOBALS['nwaApi']->controller.'.php';
-} else {
-	$GLOBALS['nwaApi']->done(404, 'controllerNotFound');
-}
-//Method function
-if (function_exists($GLOBALS['nwaApi']->method)) {
-	($GLOBALS['nwaApi']->method)();
-} else {
-	$GLOBALS['nwaApi']->done(405, 'methodNotAllowed');
-}
+
 
 $GLOBALS['nwaApi']->done(204, 'nothingDone');
 
