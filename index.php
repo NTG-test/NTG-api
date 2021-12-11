@@ -22,7 +22,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') exit();
 
 require 'env.php';
 require 'functions.php';
-require 'dataStructure.php';
 require 'handle.php';
 
 function api() {
@@ -38,7 +37,9 @@ function api() {
 	if ($db->connect_error)
 		exit($db->connect_error);
 	$db->set_charset("utf8");
-	nwa\createDatabaseTables($db);
+	// nwa\createDatabaseTables($db);
+	$sql = file_get_contents('dataStructure.sql');   
+	$db->multi_query($sql);
 
 	$request = new api\request();
 	
