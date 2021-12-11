@@ -38,8 +38,8 @@ function api() {
 		exit($db->connect_error);
 	$db->set_charset("utf8");
 	// nwa\createDatabaseTables($db);
-	$sql = file_get_contents('dataStructure.sql');   
-	$db->multi_query($sql);
+	// $sql = file_get_contents('dataStructure.sql');   
+	// $db->multi_query($sql);
 
 	$request = new api\request();
 	
