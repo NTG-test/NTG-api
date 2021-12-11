@@ -55,6 +55,7 @@ function api() {
 	} else {
 		$response = new api\response(404, 'controllerNotFound');
 	}
+
 	//Method function
 	if (function_exists($request->method)) {
 		$response = ($request->method)($db, $request->id);
