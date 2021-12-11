@@ -1,7 +1,5 @@
 <?php
 
-namespace api;
-
 error_reporting(E_ALL);
 
 // Headers
@@ -63,7 +61,7 @@ function api() {
 	return $response;
 }
 
-exit(json_encode(api\api(), JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT));
+exit(json_encode(api(), JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT));
 
 
 
