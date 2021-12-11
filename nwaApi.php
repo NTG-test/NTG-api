@@ -64,24 +64,16 @@ class request {
 
 class response {
 	private $httpResponseCode;
-	public $data = array();
-	private $response;
+	public $response = array();
 
 	public function __construct($httpResponseCode, $responseFinalMassage = null) {
 		$this->httpResponseCode = $httpResponseCode;
 		
 		if (isset($responseFinalMassage)) {
 			$this->response = $responseFinalMassage;
-		}
-		if ($GLOBALS['db']->error) {
+		} else if ($GLOBALS['db']->error) {
 			$this->response = 'sqlError: '.$GLOBALS['db']->error;
 		}
-		if (is_null($this->response)) {
-			$this->response = json_encode($this->data, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);
-		}
-		
-		$this->logRequestAndResponseToDb();
-		$this->emailErrorToAdmin();
 
 		http_response_code($this->httpResponseCode);
 		exit($this->response);

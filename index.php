@@ -58,6 +58,9 @@ function main() {
 		$response = new nwa\response(405, 'methodNotAllowed');
 	}
 
+		// $this->logRequestAndResponseToDb();
+		// $this->emailErrorToAdmin();
+
 	exit($response);
 }
 main();
