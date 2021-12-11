@@ -1,5 +1,7 @@
 <?php
 
+namespace api;
+
 error_reporting(E_ALL);
 
 // Headers
@@ -25,7 +27,7 @@ require 'apiFunctions.php';
 require 'apiDataStructure.php';
 require 'apiHandle.php';
 
-function zzz() {
+function api() {
 	new api\env('.env');
 	
 	// Connect database
@@ -61,7 +63,7 @@ function zzz() {
 	return $response;
 }
 
-exit(json_encode(zzz(), JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT));
+exit(json_encode(api\api(), JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT));
 
 
 
