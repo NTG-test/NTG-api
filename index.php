@@ -21,8 +21,8 @@ if (!$_SERVER['HTTPS']) {
 if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') exit();
 
 require 'env.php';
+require 'api.php';
 require 'functions.php';
-require 'handle.php';
 
 function api() {
 	new api\env('.env');
